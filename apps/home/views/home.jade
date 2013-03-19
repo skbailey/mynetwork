@@ -9,10 +9,10 @@ block content
           span.icon-bar
           span.icon-bar
         .nav-collapse.collapse
-          form.navbar-form.pull-right
-            input.span2(type="text", placeholder="Email")
-            input.span2(type="password", placeholder="Password")
-            button.btn(type='button') Sign In
+          form.navbar-form.pull-right(action="/sessions", method="POST")
+            input.span2(type="text", placeholder="Username", name="username")
+            input.span2(type="password", placeholder="Password", name="password")
+            input.btn(type='submit', value="Sign In")
     .container
       .hero-unit
         h1 Welcome!
@@ -33,7 +33,5 @@ block content
               label Email:
                 input.span3(name="email", type="email", placeholder="Email")
               label Birthday:
-                input.span1(name="month", type="text", placeholder="MM")
-                input.span1(name="day", type="text", placeholder="DD")
-                input.span1(name="year", type="text", placeholder="YYYY")
+                input.span3(name="birthday", type="date", placeholder="MM/DD/YYYY")
               input.btn.btn-primary.pull-right(type="submit", value="SignUp")

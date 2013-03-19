@@ -6,4 +6,10 @@ html
     link(rel='stylesheet', href='/stylesheets/bootstrap.css', media='screen')
     link(rel='stylesheet', href='/stylesheets/bootstrap-responsive.css', media='screen')
   body
+    if hasMessages
+      each message in messages
+        .alert
+          button(type="button", class="close", data-dismiss="alert") &times;
+          strong= message.type
+          = message.info
     block content

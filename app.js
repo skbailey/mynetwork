@@ -6,8 +6,10 @@ require('coffee-script');
 
 var express = require('express'), 
     http = require('http'), 
-    path = require('path');
+    path = require('path'),
+    mongoose = require('mongoose');
 
+mongoose.connect('localhost', 'test');
 var app = express();
 
 app.configure(function(){
@@ -20,6 +22,15 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(express.cookieParser('your secret here'));
   app.use(express.session());
+  app.use(function(req, res, next){
+    var messages = req.session.messages || [];
+    res.locals({
+      hasMessages: !!messages.length,
+      messages: messages
+    });
+    req.session.messages = [];
+    next();
+  });
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
 });
