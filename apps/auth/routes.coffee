@@ -15,9 +15,19 @@ module.exports = (app) ->
         res.redirect "/"
 
   app.get "/users/:username", (req, res) ->
-    console.log "What's in param", req.params.username
-    res.render "#{__dirname}/views/user",
-      username: req.params.username
+    console.log "what is req.params.username", req.params.username
+    User.findOne username: req.params.username, (err, user) ->
+      if err
+        console.log "Could not find user"
+        res.send 500, error: "Could not find user"
+      else if user and req.session.currentUser is user.username
+        res.render "#{__dirname}/views/user",
+          username: user.username
+          email: user.email
+      else
+        res.redirect "/"
+        return
+
 
   app.post "/sessions", (req, res) ->
     console.log "Looking for": req.body.username

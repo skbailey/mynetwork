@@ -3,8 +3,10 @@ html
   head
     meta(charset='utf-8')
     title MyNetwork
+    link(rel='stylesheet', href='/stylesheets/normalize.css', media='screen')
     link(rel='stylesheet', href='/stylesheets/bootstrap.css', media='screen')
     link(rel='stylesheet', href='/stylesheets/bootstrap-responsive.css', media='screen')
+    link(rel='stylesheet', href='/stylesheets/bootstrap-main.css', media='screen')
   body
     if hasMessages
       each message in messages
